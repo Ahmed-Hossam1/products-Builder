@@ -3,7 +3,7 @@ import Button from "./components/Button/Button";
 import Card from "./components/Card/Card";
 import Modal from "./components/Modal/Modal";
 import { categories, productList } from "./data";
-import { ChangeEvent, FormEvent, Fragment, useState } from "react";
+import { ChangeEvent, FormEvent, Fragment, useCallback, useState } from "react";
 import { formInputsList } from "./data";
 import InputModal from "./components/Input/InputModal";
 import { IProduct } from "./Interface/Interfaces";
@@ -168,19 +168,21 @@ function App() {
     setIsOpen(true);
   }
 
-  function close() {
+  const  close = useCallback(()=> {
     setIsOpen(false);
-  }
-  function openEditModal() {
+  },[])
+
+  const openEditModal = useCallback(() => {
     setIsOpenEditModal(true);
-  }
+  }, []);
 
   function closeEditModal() {
     setIsOpenEditModal(false);
   }
-  function openDeleteModal() {
+
+  const openDeleteModal = useCallback(() => {
     setConfirmDelete(true);
-  }
+  }, []);
 
   function closeDeleteModal() {
     setConfirmDelete(false);

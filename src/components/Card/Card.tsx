@@ -2,6 +2,7 @@
 import Colors from "../colors/Colors";
 import { IProduct } from "../../Interface/Interfaces";
 import Button from "../Button/Button";
+import { memo } from "react";
 
 interface IProps {
   product: IProduct;
@@ -82,4 +83,4 @@ const Card = ({ product, setProductToEdit, openModal  ,idx, setProductToEditIdx 
   );
 };
 
-export default Card;
+export default memo(Card);
