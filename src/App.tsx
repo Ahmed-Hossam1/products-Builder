@@ -50,16 +50,21 @@ function App() {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   // ** --------------- Handlers ------------
-  function handleInputs(e: ChangeEvent<HTMLInputElement>) {
+  // function handleInputs(e: ChangeEvent<HTMLInputElement>) {
+  //   const { value, name } = e.target;
+  //   setProduct({ ...product, [name]: value });
+
+  //   setErrors({
+  //     ...errors,
+  //     [name]: "",
+  //   });
+  // }
+
+  const handleInputs = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setProduct({ ...product, [name]: value });
-
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  }
-
+    setProduct((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  }, []);
   function handleToEditInputs(e: ChangeEvent<HTMLInputElement>) {
     const { value, name } = e.target;
     setProductToEdit({ ...productToEdit, [name]: value });
@@ -168,9 +173,9 @@ function App() {
     setIsOpen(true);
   }
 
-  const  close = useCallback(()=> {
+  const close = useCallback(() => {
     setIsOpen(false);
-  },[])
+  }, []);
 
   const openEditModal = useCallback(() => {
     setIsOpenEditModal(true);
@@ -364,7 +369,7 @@ function App() {
       </Modal>
 
       {/* ------------------ Modal Delete ------------------- */}
-
+      
       <Modal
         title="Are you Sure you want to delete this to product from your store ? "
         isOpen={confirmDelete}
